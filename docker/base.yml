@@ -1,0 +1,22 @@
+version: '2.4'
+services:
+    amex:
+        container_name: amex
+        build:
+            context: ../amex
+            dockerfile: ../docker/amex.Dockerfile
+    kibana:
+        container_name: kibana
+        build:
+            context: ../kibana
+            dockerfile: ../docker/kibana.Dockerfile
+    logstash:
+        container_name: logstash
+        build:
+            context: ../logstash
+            dockerfile: ../docker/logstash.Dockerfile
+    elasticsearch:
+        container_name: elasticsearch
+        build:
+            context: ../elasticsearch
+            dockerfile: ../docker/elasticsearch.Dockerfile

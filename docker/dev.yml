@@ -1,0 +1,36 @@
+version: '2.4'
+services:
+    amex:
+        volumes:
+            - ../amex:/home/dockeruser/amex
+        env_file:
+            - ./.local.env
+        mem_limit: 1g
+    kibana:
+        ports:
+            - 3000:5601
+        env_file:
+            - ./.local.env
+        mem_limit: 1g
+    logstash:
+        ports:
+            - 5045:5045
+        env_file:
+            - ./.local.env
+        environment:
+            - "LS_JAVA_OPTS=-Xmx1g -Xms1g"
+        mem_limit: 1g
+    elasticsearch:
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+            nofile:
+                soft: 65536
+                hard: 65536
+        environment:
+            - cluster.name=es-docker
+            - node.name=node1
+            - bootstrap.memory_lock=true
+            - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+        mem_limit: 4g
